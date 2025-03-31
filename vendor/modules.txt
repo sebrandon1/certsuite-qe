@@ -134,8 +134,8 @@ github.com/google/gnostic-models/extensions
 github.com/google/gnostic-models/jsonschema
 github.com/google/gnostic-models/openapiv2
 github.com/google/gnostic-models/openapiv3
-# github.com/google/go-cmp v0.6.0
-## explicit; go 1.13
+# github.com/google/go-cmp v0.7.0
+## explicit; go 1.21
 github.com/google/go-cmp/cmp
 github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
@@ -223,7 +223,7 @@ github.com/json-iterator/go
 ## explicit; go 1.13
 github.com/k8snetworkplumbingwg/multi-networkpolicy/pkg/apis/k8s.cni.cncf.io
 github.com/k8snetworkplumbingwg/multi-networkpolicy/pkg/apis/k8s.cni.cncf.io/v1beta1
-# github.com/k8snetworkplumbingwg/network-attachment-definition-client v1.7.5
+# github.com/k8snetworkplumbingwg/network-attachment-definition-client v1.7.6
 ## explicit; go 1.21
 github.com/k8snetworkplumbingwg/network-attachment-definition-client/pkg/apis/k8s.cni.cncf.io
 github.com/k8snetworkplumbingwg/network-attachment-definition-client/pkg/apis/k8s.cni.cncf.io/v1
@@ -294,7 +294,7 @@ github.com/mxk/go-flowrate/flowrate
 # github.com/oklog/ulid v1.3.1
 ## explicit
 github.com/oklog/ulid
-# github.com/onsi/ginkgo/v2 v2.23.0
+# github.com/onsi/ginkgo/v2 v2.23.3
 ## explicit; go 1.23.0
 github.com/onsi/ginkgo/v2
 github.com/onsi/ginkgo/v2/config
@@ -316,8 +316,8 @@ github.com/onsi/ginkgo/v2/internal/parallel_support
 github.com/onsi/ginkgo/v2/internal/testingtproxy
 github.com/onsi/ginkgo/v2/reporters
 github.com/onsi/ginkgo/v2/types
-# github.com/onsi/gomega v1.36.2
-## explicit; go 1.22.0
+# github.com/onsi/gomega v1.36.3
+## explicit; go 1.23.0
 github.com/onsi/gomega
 github.com/onsi/gomega/format
 github.com/onsi/gomega/internal
@@ -461,7 +461,7 @@ github.com/red-hat-storage/odf-operator/api/v1alpha1
 # github.com/redhat-best-practices-for-k8s/certsuite-claim v1.0.55
 ## explicit; go 1.24.1
 github.com/redhat-best-practices-for-k8s/certsuite-claim/pkg/claim
-# github.com/redhat-best-practices-for-k8s/oct v0.0.35
+# github.com/redhat-best-practices-for-k8s/oct v0.0.36
 ## explicit; go 1.24.1
 github.com/redhat-best-practices-for-k8s/oct/pkg/certdb/config
 github.com/redhat-best-practices-for-k8s/oct/pkg/certdb/offlinecheck
@@ -644,7 +644,7 @@ gorm.io/gorm/clause
 gorm.io/gorm/logger
 gorm.io/gorm/schema
 gorm.io/gorm/utils
-# helm.sh/helm/v3 v3.17.1
+# helm.sh/helm/v3 v3.17.2
 ## explicit; go 1.23.0
 helm.sh/helm/v3/pkg/chart
 helm.sh/helm/v3/pkg/release
@@ -782,7 +782,7 @@ k8s.io/apimachinery/pkg/watch
 k8s.io/apimachinery/third_party/forked/golang/json
 k8s.io/apimachinery/third_party/forked/golang/netutil
 k8s.io/apimachinery/third_party/forked/golang/reflect
-# k8s.io/cli-runtime v0.32.1
+# k8s.io/cli-runtime v0.32.2
 ## explicit; go 1.23.0
 k8s.io/cli-runtime/pkg/genericclioptions
 k8s.io/cli-runtime/pkg/genericiooptions
@@ -1048,7 +1048,7 @@ k8s.io/kube-openapi/pkg/spec3
 k8s.io/kube-openapi/pkg/util/proto
 k8s.io/kube-openapi/pkg/util/proto/validation
 k8s.io/kube-openapi/pkg/validation/spec
-# k8s.io/kubectl v0.32.1
+# k8s.io/kubectl v0.32.2
 ## explicit; go 1.23.0
 k8s.io/kubectl/pkg/cmd/util
 k8s.io/kubectl/pkg/drain
@@ -1079,7 +1079,7 @@ k8s.io/utils/strings/slices
 sigs.k8s.io/container-object-storage-interface-api/apis
 sigs.k8s.io/container-object-storage-interface-api/apis/objectstorage
 sigs.k8s.io/container-object-storage-interface-api/apis/objectstorage/v1alpha1
-# sigs.k8s.io/controller-runtime v0.20.3
+# sigs.k8s.io/controller-runtime v0.20.4
 ## explicit; go 1.23.0
 sigs.k8s.io/controller-runtime/pkg/client
 sigs.k8s.io/controller-runtime/pkg/client/apiutil
