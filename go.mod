@@ -8,7 +8,7 @@ require (
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/onsi/ginkgo/v2 v2.23.4
 	github.com/onsi/gomega v1.37.0
-	github.com/openshift-kni/eco-goinfra v0.0.0-20250320191755-667a76dcc2d0
+	github.com/openshift-kni/eco-goinfra v0.0.0-20250626134339-a4d8fdcb3572
 	github.com/openshift/client-go v0.0.0-20241107164952-923091dd2b1a
 	github.com/openshift/machine-config-operator v0.0.1-0.20231024085435-7e1fb719c1ba
 	github.com/operator-framework/api v0.32.0
