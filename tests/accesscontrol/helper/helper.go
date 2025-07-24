@@ -28,6 +28,20 @@ import (
 	egiNodes "github.com/openshift-kni/eco-goinfra/pkg/nodes"
 )
 
+func DefineDeploymentWithImage(replica int32, containers int, name, namespace, image string) (*appsv1.Deployment, error) {
+	if containers < 1 {
+		return nil, errors.New("invalid number of containers")
+	}
+
+	deploymentStruct := deployment.DefineDeployment(name, namespace,
+		image, tsparams.TestDeploymentLabels)
+
+	globalhelper.AppendContainersToDeployment(deploymentStruct, containers-1, image)
+	deployment.RedefineWithReplicaNumber(deploymentStruct, replica)
+
+	return deploymentStruct, nil
+}
+
 func DefineDeployment(replica int32, containers int, name, namespace string) (*appsv1.Deployment, error) {
 	if containers < 1 {
 		return nil, errors.New("invalid number of containers")
