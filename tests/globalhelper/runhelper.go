@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"slices"
 	"strings"
 	"time"
 
@@ -106,6 +107,10 @@ func launchTestsViaBinary(testCaseName string, tcNameForReport string, reportDir
 		"--label-filter", testCaseName,
 		"--sanitize-claim", "true",
 	}
+	// For access-control tests, allow running against non-running pods
+	if strings.Contains(testCaseName, globalparameters.AccessControlSuiteName) {
+		testArgs = append(testArgs, "--allow-non-running", "true")
+	}
 
 	cmdPath := fmt.Sprintf("%s/%s", GetConfiguration().General.CertsuiteRepoPath,
 		GetConfiguration().General.CertsuiteEntryPointBinary)
@@ -167,6 +172,15 @@ func launchTestsViaImage(testCaseName string, tcNameForReport string, reportDir 
 		"--enable-data-collection", "false",
 		"--sanitize-claim", "true",
 		"--label-filter", testCaseName,
+	}
+
+	allowedSuitesNonRunning := []string{
+		globalparameters.AccessControlSuiteName,
+		globalparameters.NetworkSuiteName,
+	}
+
+	if slices.Contains(allowedSuitesNonRunning, testCaseName) {
+		certsuiteCmdArgs = append(certsuiteCmdArgs, "--allow-non-running", "true")
 	}
 
 	// print the command

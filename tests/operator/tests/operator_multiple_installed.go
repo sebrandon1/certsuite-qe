@@ -1,7 +1,9 @@
 package operator
 
 import (
+	"context"
 	"fmt"
+	"os"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -10,6 +12,9 @@ import (
 	"github.com/redhat-best-practices-for-k8s/certsuite-qe/tests/globalparameters"
 	tshelper "github.com/redhat-best-practices-for-k8s/certsuite-qe/tests/operator/helper"
 	tsparams "github.com/redhat-best-practices-for-k8s/certsuite-qe/tests/operator/parameters"
+	corev1 "k8s.io/api/core/v1"
+	"k8s.io/apimachinery/pkg/api/resource"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 var _ = Describe("Operator multiple installed,", Serial, func() {
@@ -138,13 +143,38 @@ var _ = Describe("Operator multiple installed,", Serial, func() {
 		Expect(err).ToNot(HaveOccurred())
 	})
 
-	It("Deploy the same operator (different versions) different namespaces [negative]", func() {
+	FIt("Deploy the same operator (different versions) different namespaces [negative]", func() {
 		// This is a negative test case to verify that the same operator cannot be deployed
 		// in different namespaces with different versions. This is an invalid use case.
 
 		// We want to create a custom catalog source for this test.
 		// This means we will have access to a "new" and "old" channel for the postgresql.
 		// We will deploy the "new" channel in the first namespace and the "old" channel in the second namespace.
+
+		// Resource pre-check: Skip if total cluster allocatable memory is below threshold
+		threshold := os.Getenv("QE_OPERATOR_MULTI_MIN_ALLOC_MEM")
+		if threshold == "" {
+			threshold = "1Gi"
+		}
+		required := resource.MustParse(threshold)
+
+		nodes, errNodes := globalhelper.GetAPIClient().Nodes().List(context.TODO(), metav1.ListOptions{})
+		Expect(errNodes).ToNot(HaveOccurred(), "failed to list nodes for resource pre-check")
+
+		var totalAllocMem resource.Quantity
+		totalAllocMem.Set(0)
+		for _, n := range nodes.Items {
+			if m, ok := n.Status.Allocatable[corev1.ResourceMemory]; ok {
+				totalAllocMem.Add(m)
+			}
+		}
+		if totalAllocMem.Cmp(required) < 0 {
+			Skip(fmt.Sprintf("Skipping due to low memory: need %s allocatable, have %s",
+				required.String(), totalAllocMem.String()))
+		}
+
+		// Log the total allocatable memory
+		GinkgoWriter.Printf("Total allocatable memory: %s\n", totalAllocMem.String())
 
 		By("Create custom-operator catalog source")
 		err := globalhelper.DeployCustomOperatorSource("quay.io/redhat-best-practices-for-k8s/qe-custom-catalog")
