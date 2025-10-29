@@ -48,6 +48,19 @@ var _ = Describe("Access-control ssh-daemons,", func() {
 		err := globalhelper.CreateAndWaitUntilPodIsReady(testPod, tsparams.Timeout)
 		Expect(err).ToNot(HaveOccurred())
 
+		By("Assert pod does not have ssh daemon running")
+		runningPod, err := globalhelper.GetRunningPod(randomNamespace, tsparams.TestPodName)
+		Expect(err).ToNot(HaveOccurred())
+
+		// Use the exec command to check if the ssh daemon is running
+		output, err := globalhelper.ExecCommand(*runningPod, []string{"ps", "-ef"})
+		Expect(err).ToNot(HaveOccurred())
+		Expect(output.String()).To(Not(ContainSubstring("ssh-agent")))
+		Expect(output.String()).To(Not(ContainSubstring("ssh-add")))
+		Expect(output.String()).To(Not(ContainSubstring("ssh-keygen")))
+		Expect(output.String()).To(Not(ContainSubstring("ssh-keyscan")))
+		Expect(output.String()).To(Not(ContainSubstring("ssh-copy-id")))
+
 		By("Start ssh-daemons")
 		err = globalhelper.LaunchTests(
 			tsparams.CertsuiteNoSSHDaemonsAllowed,
