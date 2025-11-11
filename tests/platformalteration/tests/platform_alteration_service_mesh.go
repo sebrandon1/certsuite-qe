@@ -64,8 +64,8 @@ var _ = Describe("platform-alteration-service-mesh-usage-installed", Ordered, fu
 			[]string{}, randomCertsuiteConfigDir)
 		Expect(err).ToNot(HaveOccurred())
 
-		if globalhelper.IsKindCluster() {
-			Skip("Service mesh test is not applicable for Kind cluster")
+		if globalhelper.IsVanillaK8sCluster() {
+			Skip("Service mesh test is not applicable for vanilla K8s clusters")
 		}
 	})
 
