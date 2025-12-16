@@ -2,7 +2,6 @@ package operator
 
 import (
 	"fmt"
-	"strings"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -172,12 +171,8 @@ var _ = Describe("Operator install-source,", Serial, func() {
 
 	// 66143
 	It("one operator not installed with OLM [negative]", func() {
-		// TODO: Known issue with OCP 4.20 certified-operators. Fix later.
-		if !globalhelper.IsKindCluster() {
-			if ocpVersion, err := globalhelper.GetClusterVersion(); err == nil && strings.HasPrefix(ocpVersion, "4.20") {
-				Skip("TODO: Known issue with OCP 4.20 certified-operators. Fix later.")
-			}
-		}
+		// Note: This test uses postgresql operator which is available in all OCP versions
+		// (see issue #1283 for operator catalog availability)
 
 		By("Query the packagemanifest for postgresql operator package name and catalog source")
 		postgresOperatorName, catalogSource := globalhelper.CheckOperatorExistsOrFail(tsparams.OperatorPackageNamePrefixLightweight,
@@ -250,12 +245,8 @@ var _ = Describe("Operator install-source,", Serial, func() {
 
 	// 66144
 	It("two operators, both installed with OLM", func() {
-		// TODO: Known issue with OCP 4.20 certified-operators. Fix later.
-		if !globalhelper.IsKindCluster() {
-			if ocpVersion, err := globalhelper.GetClusterVersion(); err == nil && strings.HasPrefix(ocpVersion, "4.20") {
-				Skip("TODO: Known issue with OCP 4.20 certified-operators. Fix later.")
-			}
-		}
+		// Note: This test uses grafana-operator and postgresql which are available in all OCP versions
+		// (see issue #1283 for operator catalog availability)
 
 		By("Query the packagemanifest for Grafana operator package name and catalog source")
 		grafanaOperatorName, catalogSource := globalhelper.CheckOperatorExistsOrFail("grafana", randomNamespace)
@@ -344,12 +335,8 @@ var _ = Describe("Operator install-source,", Serial, func() {
 
 	// 66145
 	It("two operators, one not installed with OLM [negative]", func() {
-		// TODO: Known issue with OCP 4.20 certified-operators. Fix later.
-		if !globalhelper.IsKindCluster() {
-			if ocpVersion, err := globalhelper.GetClusterVersion(); err == nil && strings.HasPrefix(ocpVersion, "4.20") {
-				Skip("TODO: Known issue with OCP 4.20 certified-operators. Fix later.")
-			}
-		}
+		// Note: This test uses postgresql operator which is available in all OCP versions
+		// (see issue #1283 for operator catalog availability)
 
 		By("Query the packagemanifest for postgresql operator package name and catalog source")
 		postgresOperatorName, catalogSource := globalhelper.CheckOperatorExistsOrFail(tsparams.OperatorPackageNamePrefixLightweight,

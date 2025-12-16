@@ -37,8 +37,14 @@ DEFAULT_VERSIONS="4.14 4.17 4.18 4.19 4.20"
 
 # Operators we depend on for QE tests
 # Format: catalog_type:operator_package_name:description
+#
+# Note: We have version-specific certified operators:
+#   - cockroachdb-certified: Used for OCP 4.14-4.19
+#   - mongodb-enterprise: Used for OCP 4.20+ (alternative since cockroachdb-certified is not available)
+# See tests/utils/operatorversions/ for the mapping logic.
 REQUIRED_OPERATORS="
-certified-operators:cockroachdb-certified:Used for affiliated certification tests
+certified-operators:cockroachdb-certified:Used for affiliated certification tests (OCP 4.14-4.19)
+certified-operators:mongodb-enterprise:Used for affiliated certification tests (OCP 4.20+)
 community-operators:grafana-operator:Used for operator tests
 community-operators:postgresql:Used as lightweight operator for various tests
 redhat-operators:cluster-logging:Used for cluster-wide operator tests
